@@ -9,8 +9,8 @@ struct BTNode {
   T data;  // 数据域
   int height;  // 在树中的高度
   
-  // 默认构造函数
-  BTNode(const T &e = T, BTNode<T> *p = nullptr, BTNode<T> *lc = nullptr,
+  // 默认构造函数(默认参数只在定义中声明，在实现中不再声明)
+  BTNode(const T &e = T(), BTNode<T> *p = nullptr, BTNode<T> *lc = nullptr,
          BTNode<T> *rc = nullptr);
   
   // 以本结点为根的二叉树的结点个数

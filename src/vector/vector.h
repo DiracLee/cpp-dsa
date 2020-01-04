@@ -57,6 +57,10 @@ class Vector {
   // size
   // 功能：返回向量中元素个数
   int size() const;
+  
+  // empty
+  // 功能：向量判空
+  bool empty() const;
 
   // get
   // 功能：返回下标为 r 的元素的值

@@ -2,12 +2,55 @@
 #define DIRAC_BTNODE_CC
 
 #include "btnode.h"
+#include <stdexcept>
+#include "../stack/stack.cc"
 
+using std::runtime_error;
 namespace dirac {
 
+/* ------------ external ----------- */
+
 template <typename T>
-BTNode<T>::BTNode(const T &e = T, BTNode<T> *p = nullptr,
-                  BTNode<T> *lc = nullptr, BTNode<T> *rc = nullptr)
+void visit(const T & e) {
+  std::cout << e << " ";
+}
+
+/* ------------- Tools ------------ */
+template <typename T, typename VST>
+void trav_pre_v1(BTNode<T> *root, VST &visit) {
+  Stack<BTNode<T> *> S;
+  S.push(root);
+  while (!S.empty()) {
+    BTNode<T> *p_node = S.pop();
+    visit(p_node->data);
+    if (p_node->rchild) S.push(p_node->rchild);
+    if (p_node->lchild) S.push(p_node->lchild);
+  }
+}
+
+template <typename T, typename VST>
+void visit_along_left_branch(BTNode<T> *root, VST &visit,
+                             Stack<BTNode<T> *> &S) {
+  while (root) {
+    visit(root->data);
+    S.push(root->rchild);
+    root = root->lchild;
+  }
+}
+
+template <typename T, typename VST>
+void trav_pre_v2(BTNode<T> *root, VST &visit) {
+  Stack<BTNode<T> *> S;
+  visit_along_left_branch(root, visit, S);
+  while (!S.empty()) {
+    root = S.pop();
+    visit_along_left_branch(root, visit, S);
+  }
+}
+
+/* ------------- internal ------------ */
+template <typename T>
+BTNode<T>::BTNode(const T &e, BTNode<T> *p, BTNode<T> *lc, BTNode<T> *rc)
     : data(e), parent(p), lchild(lc), rchild(rc) {}
 
 template <typename T>
@@ -20,8 +63,8 @@ int BTNode<T>::size() {
 
 template <typename T>
 BTNode<T> *BTNode<T>::insert_as_lc(BTNode<T> *p_node) {
-  if (!lchild) {
-    throw std::run_time_error("ERROR: lchild exists but reinsert!");
+  if (lchild) {
+    throw std::runtime_error("ERROR: lchild exists but reinsert!");
     return nullptr;
   }
   p_node->parent = this;
@@ -30,8 +73,8 @@ BTNode<T> *BTNode<T>::insert_as_lc(BTNode<T> *p_node) {
 
 template <typename T>
 BTNode<T> *BTNode<T>::insert_as_rc(BTNode<T> *p_node) {
-  if (!rchild) {
-    throw std::run_time_error("ERROR: rchild exists but reinsert!");
+  if (rchild) {
+    throw std::runtime_error("ERROR: rchild exists but reinsert!");
     return nullptr;
   }
   p_node->parent = this;
@@ -57,7 +100,9 @@ void BTNode<T>::trav_level(VST &visit) {}
 
 template <typename T>
 template <typename VST>
-void BTNode<T>::trav_pre(VST &visit) {}
+void BTNode<T>::trav_pre(VST &visit) {
+  trav_pre_v2(this, visit);
+}
 
 template <typename T>
 template <typename VST>

@@ -230,10 +230,15 @@ int Vector<T>::size() const {
 }
 
 template <typename T>
+bool Vector<T>::empty() const {
+  return _size == 0;
+}
+
+template <typename T>
 T Vector<T>::get(rank r) const {
   if (r >= _size || r < 0) {  // assert: 0 <= r < _size
     throw std::range_error("\nOut of range when call 'get'");
-    return T;
+    return T();
   }
   return _elements[r];
 }
@@ -242,7 +247,7 @@ template <typename T>
 void Vector<T>::put(rank r, const T& e) {
   if (r >= _size || r < 0) {  // assert: 0 <= r < _size
     throw std::range_error("\nOut of range when call 'put'");
-    return T;
+    return T();
   }
   _elements[r] = e;
 }
@@ -251,7 +256,7 @@ template <typename T>
 T& Vector<T>::operator[](rank r) const {
   if (r >= _size || r < 0) {  // assert: 0 <= r < _size
     throw std::range_error("\nOut of range when call 'operator[]'");
-    return T;
+    return T();
   }
   return _elements[r];
 }
@@ -308,7 +313,7 @@ rank Vector<T>::find(T e, rank first, rank last) const {
   if (first < 0 || first >= _size || last < 0 || last >= _size ||
       first > last) {
     throw std::range_error("\nOut of range when call 'find'");
-    return first - 1
+    return first - 1;
   }
   while (first <= last && _elements[last] != e) --last;
   return last;
