@@ -6,12 +6,6 @@
 
 namespace dirac {
 
-/* ------------Outliers ------------- */
-template <typename T>
-void visit(const T& e) {
-  std::cout << e << " ";
-}
-
 /* ------------ Private ------------- */
 template <typename T>
 void List<T>::init() {

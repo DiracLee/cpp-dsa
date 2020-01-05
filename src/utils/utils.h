@@ -9,6 +9,13 @@ void swap(T& a, T& b) {
   a = b;
   b = temp;
 }
+
+// 访问模板函数
+template <typename T>
+void visit(const T &e) {
+  std::cout << e << " ";
+}
+
 }  // namespace dirac
 
 #endif // DIRAC_UTILS_H

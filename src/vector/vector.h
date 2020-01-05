@@ -71,7 +71,7 @@ class Vector {
   void put(rank r, const T &e);
 
   // 重载[]运算符
-  T &operator[](rank r) const;
+  T &operator[](rank r);
 
   // insert
   // 功能：将元素 e 插入向量中下标为 r 的位置，其后元素下标依次加一

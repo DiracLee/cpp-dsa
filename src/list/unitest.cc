@@ -2,6 +2,7 @@
 #include <iostream>
 #include "list.cc"
 #include "list_node.cc"
+#include "../utils/utils.h"
 
 using dirac::List;
 using dirac::ListNode;

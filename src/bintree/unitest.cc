@@ -13,12 +13,21 @@ int main() {
   std::cout << node2.data << std::endl;
   BTNode<int> node3(18);  // 指定元素构造函数
   std::cout << node3.data << std::endl;
-  
+
   // 测试插入函数
   node1.insert_as_lc(&node2);
   node1.insert_as_rc(&node3);
-  
+
   // 测试先序遍历
   node1.trav_pre(visit<int>);
+
+  // 测试中序遍历
+  node1.trav_in(visit<int>);
+
+  // 测试后序遍历
+  node1.trav_post(visit<int>);
+
+  // 测试层序遍历
+  node1.trav_level(visit<int>);
   return 0;
 }

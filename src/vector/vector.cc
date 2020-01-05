@@ -247,16 +247,15 @@ template <typename T>
 void Vector<T>::put(rank r, const T& e) {
   if (r >= _size || r < 0) {  // assert: 0 <= r < _size
     throw std::range_error("\nOut of range when call 'put'");
-    return T();
+    return;
   }
   _elements[r] = e;
 }
 
 template <typename T>
-T& Vector<T>::operator[](rank r) const {
+T& Vector<T>::operator[](rank r) {
   if (r >= _size || r < 0) {  // assert: 0 <= r < _size
     throw std::range_error("\nOut of range when call 'operator[]'");
-    return T();
   }
   return _elements[r];
 }
