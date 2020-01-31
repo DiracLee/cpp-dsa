@@ -18,14 +18,17 @@ class BinTree {
   void update_height_above(BTNode<T> *p_node);
 
   // 指定特定结点的左孩子
-  BTNode<T> *insert_as_lc(BTNode<T> *, BTNode<T> *);
+  BTNode<T> *insert_as_lc(BTNode<T> *, BTNode<T> *);  // 暂不打算实现
 
   // 指定特定结点的右孩子
-  BTNode<T> *insert_as_rc(BTNode<T> *, BTNode<T> *);
+  BTNode<T> *insert_as_rc(BTNode<T> *, BTNode<T> *);  // 暂不打算实现
 
  public:
   // 空构造函数
-  BinTree();
+  BinTree(BTNode<T> *r=nullptr);
+
+  // 元素构造函数
+  BinTree(const T &e);
 
   // 返回根节点
   BTNode<T> *root();
@@ -37,10 +40,10 @@ class BinTree {
   bool empty();
 
   // 将指定元素插入到特定结点的左孩子域
-  BTNode<T> *insert_as_lc(const T &, BTNode<T> *);
+  BTNode<T> *insert_as_lc(const T &, BTNode<T> *p_node);
 
   // 将指定元素插入到特定结点的右孩子域
-  BTNode<T> *insert_as_rc(const T &, BTNode<T> *);
+  BTNode<T> *insert_as_rc(const T &, BTNode<T> *p_node);
 };
 }  // namespace dirac
 

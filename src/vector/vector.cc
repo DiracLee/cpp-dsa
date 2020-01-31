@@ -209,6 +209,13 @@ Vector<T>::Vector(Vector<T> const& v) {
 }
 
 template <typename T>
+Vector<T>::Vector(int c, int s, const T& e) {
+  _elements = new T[_capacity = c];
+  _size = s;
+  for (rank i = 0; i < _size; ++i) _elements[i] = e;
+}
+
+template <typename T>
 Vector<T>::~Vector() {
   delete[] _elements;
   _size = 0;
@@ -270,6 +277,11 @@ void Vector<T>::insert(rank r, T e) {
   for (rank i = _size; i > r; --i) _elements[i] = _elements[i - 1];
   _elements[r] = e;
   ++_size;
+}
+
+template <typename T>
+void Vector<T>::insert(T e) {
+  insert(_size, e);
 }
 
 template <typename T>

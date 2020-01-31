@@ -1,6 +1,7 @@
 #ifndef DIRAC_BINTREE_CC
 #define DIRAC_BINTREE_CC
 #include "bintree.h"
+#include "../utils/utils.h"
 
 namespace dirac {
 
@@ -12,7 +13,7 @@ int stature(BTNode<T> *p_node) {
 template <typename T>
 int BinTree<T>::update_height(BTNode<T> *p_node) {
   return p_node->height =
-             1 + max(stature(p_node->lchild) + stature(p_node->rchild));
+             1 + max<int>(stature(p_node->lchild), stature(p_node->rchild));
 }
 
 template <typename T>
@@ -21,6 +22,16 @@ void BinTree<T>::update_height_above(BTNode<T> *p_node) {
     update_height(p_node);
     p_node = p_node->parent;
   }
+}
+
+template <typename T>
+BinTree<T>::BinTree(BTNode<T> *r) : _root(r), _size(r ? 1 : 0) {}
+
+template <typename T>
+BinTree<T>::BinTree(const T &e) {
+  BTNode<T> *r = new BTNode<T>(e);
+  _root = r;
+  _size = 1;
 }
 
 template <typename T>

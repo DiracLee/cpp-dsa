@@ -19,6 +19,12 @@ int main() {
   // 测试拷贝构造函数：来自向量
   Vector<int> ivec4(ivec1);
 
+  // 测试同值构造函数
+  Vector<int> ivec5(10, 5, 4);
+  std::cout << "\nivec5.traverse(dirac::print) 的测试结果为：\n\t";
+  ivec5.traverse(dirac::print);
+  std::cout << std::endl;
+
   // 测试将向量作为元素的默认构造函数
   Vector<Vector<int>> vvec0;
 
@@ -102,6 +108,21 @@ int main() {
   std::cout << "\nAfter ivec3.sort(),\n\t"
             << "ivec3[i]: ";
   ivec3.traverse(dirac::print);
+
+  // 测试[][]
+
+  vvec0.insert(vvec0.size(), Vector<int>(A, 5));
+  vvec0.insert(vvec0.size(), Vector<int>(A, 5));
+  vvec0.insert(vvec0.size(), Vector<int>(A, 5));
+  vvec0.insert(vvec0.size(), Vector<int>(A, 5));
+  std::cout << "\nvvec0:,\n";
+  for (int i = 0; i < vvec0.size(); ++i) {
+    Vector<int> ivec = vvec0[i];
+    for (int j = 0; j < ivec.size(); ++j) {
+      std::cout << vvec0[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
 
   return 0;
 }

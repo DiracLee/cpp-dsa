@@ -10,12 +10,17 @@ void swap(T& a, T& b) {
   b = temp;
 }
 
+template <typename T>
+T& max(T a, T b) {
+  return a > b ? a : b;
+}
+
 // 访问模板函数
 template <typename T>
-void visit(const T &e) {
+void visit(const T& e) {
   std::cout << e << " ";
 }
 
 }  // namespace dirac
 
-#endif // DIRAC_UTILS_H
+#endif  // DIRAC_UTILS_H

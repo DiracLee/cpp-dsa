@@ -47,6 +47,9 @@ class Vector {
   // 拷贝构造函数：向量整体复制
   Vector(Vector<T> const &v);
 
+  // 同值构造函数：构造含有 n 个相同元素 e 的向量
+  Vector(int c, int s, const T& e);
+
   // 析构函数
   ~Vector();
 
@@ -57,7 +60,7 @@ class Vector {
   // size
   // 功能：返回向量中元素个数
   int size() const;
-  
+
   // empty
   // 功能：向量判空
   bool empty() const;
@@ -76,6 +79,10 @@ class Vector {
   // insert
   // 功能：将元素 e 插入向量中下标为 r 的位置，其后元素下标依次加一
   void insert(rank r, T e);
+
+// insert
+  // 功能：将元素 e 插入向量末尾
+  void insert(T e);
 
   // remove
   // 功能：删除秩在区间 [low, high) 的所有元素，返回被删除元素的个数
