@@ -39,18 +39,36 @@ BTNode<T> *BST<T>::insert(const T &e) {
 }
 
 template <typename T>
+BTNode<T> *remove_at(BTNode<T> *x, BTNode<T> *&hot) {
+  BTNode<T> *w = x;
+  BTNode<T> *succ = nullptr;
+  if (!x->lchild)
+    succ = x->rchild;
+  else if (!x->rchild)
+    succ = x->lchild;
+  else {
+    w = w->succ();
+    swap(x->data, w->data);
+    BTNode<T> *u = w->parent;
+    (u == x ? u->rchild : u->lchild) = succ = w->rchild;
+  }
+  hot = w->parent;
+  if (succ) succ->parent = hot;
+  delete w;
+  return succ;
+}
+
+template <typename T>
 bool BST<T>::remove(const T &e) {
   BTNode<T> *x = search(e);
   if (!x) return false;
-  delete x;
+  remove_at(x, _hot);
+  --this->_size;
   if (!_hot)
     this->_root = nullptr;
-  else {
-    if (e < _hot->data)
-      _hot->lchild = nullptr;
-    else
-      _hot->rchild = nullptr;
-  }
+  else
+    this->update_height_above(_hot);
+
   return true;
 }
 
